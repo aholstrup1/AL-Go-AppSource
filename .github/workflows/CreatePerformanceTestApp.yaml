@@ -37,7 +37,11 @@ permissions:
 
 defaults:
   run:
-    shell: PowerShell
+    shell: powershell
+
+env:
+  ALGoOrgSettings: ${{ vars.ALGoOrgSettings }}
+  ALGoRepoSettings: ${{ vars.ALGoRepoSettings }}
 
 jobs:
   CreatePerformanceTestApp:
@@ -50,11 +54,13 @@ jobs:
         id: init
         uses: aholstrup1/AL-Go-Actions/WorkflowInitialize@main
         with:
+          shell: powershell
           eventId: "DO0102"
 
       - name: Creating a new test app
         uses: aholstrup1/AL-Go-Actions/CreateApp@main
         with:
+          shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           project: ${{ github.event.inputs.project }}
           type: 'Performance Test App'
@@ -69,5 +75,6 @@ jobs:
         if: always()
         uses: aholstrup1/AL-Go-Actions/WorkflowPostProcess@main
         with:
+          shell: powershell
           eventId: "DO0102"
           telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
