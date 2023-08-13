@@ -39,7 +39,7 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: aholstrup1/AL-Go/Actions/WorkflowInitialize@c3a13dda0943552a29399f0c04a709c22fd7b36c
+        uses: aholstrup1/AL-Go/Actions/WorkflowInitialize@9e0b292d8c9dcf30c7a0bfc07ed4437b404fdc4d
         with:
           shell: powershell
           eventId: "DO0103"
@@ -53,13 +53,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Read settings
-        uses: aholstrup1/AL-Go/Actions/ReadSettings@c3a13dda0943552a29399f0c04a709c22fd7b36c
+        uses: aholstrup1/AL-Go/Actions/ReadSettings@9e0b292d8c9dcf30c7a0bfc07ed4437b404fdc4d
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
 
       - name: Read secrets
-        uses: aholstrup1/AL-Go/Actions/ReadSecrets@c3a13dda0943552a29399f0c04a709c22fd7b36c
+        uses: aholstrup1/AL-Go/Actions/ReadSecrets@9e0b292d8c9dcf30c7a0bfc07ed4437b404fdc4d
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -79,7 +79,7 @@ jobs:
           }
 
       - name: Deliver
-        uses: aholstrup1/AL-Go/Actions/Deliver@c3a13dda0943552a29399f0c04a709c22fd7b36c
+        uses: aholstrup1/AL-Go/Actions/Deliver@9e0b292d8c9dcf30c7a0bfc07ed4437b404fdc4d
         env:
           deliveryContext: '${{ steps.deliveryContext.outputs.deliveryContext }}'
         with:
@@ -101,7 +101,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: aholstrup1/AL-Go/Actions/WorkflowPostProcess@c3a13dda0943552a29399f0c04a709c22fd7b36c
+        uses: aholstrup1/AL-Go/Actions/WorkflowPostProcess@9e0b292d8c9dcf30c7a0bfc07ed4437b404fdc4d
         with:
           shell: powershell
           eventId: "DO0103"
